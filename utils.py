@@ -1,5 +1,3 @@
-import json
-
 mensagem_padrao = """
     Escolha uma opção de cotação (clique no item):
      /USD_BRLT: Dólar - Real Turismo
@@ -783,9 +781,3 @@ moedas_sigla = [
     "ZMK",
     "ZWL",
 ]
-
-
-def enviar_dados(dados: dict) -> None:
-    with open("dados.json", "a") as file:
-        json.dump(dados, file)
-        file.write("\n\n")
