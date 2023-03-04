@@ -3,10 +3,9 @@ import datetime
 import requests
 import telebot
 
-from keys import TOKEN
+from keys import TOKEN, verificar_cotacao
 from utils import (
     conversoes,
-    enviar_dados,
     mensagem_nova_solicitacao,
     mensagem_padrao,
     moedas,
@@ -52,14 +51,11 @@ def ver_cotacao(cot: str):
 bot = telebot.TeleBot(TOKEN)
 
 
-comando_duplo = []
-
-
 @bot.message_handler(commands=conversoes)
 def converter(mensagem):
     conversao = mensagem.text.replace("/", "").replace("_", "-")
     resposta = ver_cotacao(conversao)
-    enviar_dados(mensagem.json)
+    verificar_cotacao(mensagem.json)
     bot.reply_to(mensagem, resposta, parse_mode="Markdown")
     bot.send_message(mensagem.chat.id, mensagem_nova_solicitacao)
 
@@ -75,34 +71,30 @@ def outros(mensagem):
 @bot.message_handler(commands=moedas_sigla)
 def escolher_conversao(mensagem):
     opcao = mensagem.text.replace("/", "")
-    global comando_duplo
-    if not comando_duplo:
-        comando_duplo.append(opcao)
-        msg = "Agora clique na moeda a ser convertida"
-        bot.send_message(mensagem.chat.id, msg)
-        bot.send_message(mensagem.chat.id, moedas)
-        bot.send_message(mensagem.chat.id, msg)
-    elif len(comando_duplo) == 1:
-        comando_duplo.append(opcao)
-        comando = "-".join(comando_duplo)
-        comando_verificar = comando.replace("-", "_")
-        if comando_verificar not in conversoes:
-            msg = f"Não existe conversão {comando}!"
-            bot.send_message(mensagem.chat.id, msg)
-            bot.send_message(mensagem.chat.id, mensagem_nova_solicitacao)
-            comando_duplo = []
-            return
-        comando_duplo = []
-        resposta = ver_cotacao(comando)
-        enviar_dados(mensagem.json)
-        bot.send_message(mensagem.chat.id, resposta, parse_mode="Markdown")
-        bot.send_message(mensagem.chat.id, mensagem_nova_solicitacao)
+    msg = "Agora clique na moeda a ser convertida"
+    bot.send_message(mensagem.chat.id, msg)
+    lista_conversao = [conv for conv in conversoes if conv.startswith(opcao)]
 
+    convertido = [c.split("_")[1] for c in lista_conversao]
+    moedas_lista = moedas.split("\n")
+    descricao = []
+    for conv in convertido:
+        for ml in moedas_lista:
+            if ml.startswith("/" + conv + ":"):
+                descricao.append(ml.split(":")[1].strip())
+                break
 
-@bot.message_handler(commands=["Resetar", "resetar", "Reset", "reset"])
-def resetar(mensagem):
-    global comando_duplo
-    comando_duplo = []
+    opcao_moeda = ""
+    for ml in moedas_lista:
+        if ml.startswith("/" + opcao + ":"):
+            opcao_moeda = ml.split(":")[1].strip()
+
+    resposta = opcao_moeda + "\n\n"
+    for conv, desc in zip(lista_conversao, descricao):
+        resposta += "/" + conv + ": " + desc + "\n"
+
+    bot.send_message(mensagem.chat.id, resposta)
+    bot.send_message(mensagem.chat.id, msg)
 
 
 @bot.message_handler(func=lambda x: True)
