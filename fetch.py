@@ -9,12 +9,6 @@ disponíveis, as conversões disponíveis e a descrição de cada sigla, isto é
 o nome da moeda por extenso.
 
 """
-__author__ = "João Lucas Correia Barbosa de Farias"
-__license__ = "GNU GENERAL PUBLIC LICENSE 3"
-__version__ = "1.0.0"
-__maintainer__ = "João Lucas Correia Barbosa de Farias"
-__email__ = "fariasjota09@gmail.com"
-__status__ = "Production"
 
 import requests
 

@@ -13,7 +13,6 @@ URL: https://docs.awesomeapi.com.br/
 
 """
 
-
 import telebot
 
 from fetch import conversoes, moedas, moedas_sigla
