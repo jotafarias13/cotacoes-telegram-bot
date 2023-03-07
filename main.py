@@ -1,14 +1,8 @@
 import telebot
 
+from fetch import conversoes, moedas, moedas_sigla
 from keys import TOKEN, verificar_cotacao
-from utils import (
-    conversoes,
-    mensagem_nova_solicitacao,
-    mensagem_padrao,
-    moedas,
-    moedas_sigla,
-    ver_cotacao,
-)
+from utils import mensagem_nova_solicitacao, mensagem_padrao, ver_cotacao
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -37,7 +31,12 @@ def escolher_conversao(mensagem):
     bot.send_message(mensagem.chat.id, msg)
     lista_conversao = [conv for conv in conversoes if conv.startswith(opcao)]
 
-    convertido = [c.split("_")[1] for c in lista_conversao]
+    if not lista_conversao:
+        lista_conversao = [conv for conv in conversoes if conv.endswith(opcao)]
+        convertido = [c.split("_")[0] for c in lista_conversao]
+    else:
+        convertido = [c.split("_")[1] for c in lista_conversao]
+
     moedas_lista = moedas.split("\n")
     descricao = []
     for conv in convertido:
