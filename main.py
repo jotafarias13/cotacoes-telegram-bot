@@ -1,3 +1,19 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""main.py: implementação de um bot de cotação de moedas para o Telegram.
+
+O bot é capaz de fornecer informações de cotação de diversas moedas, mostrando
+as taxas de conversão entre as moedas para compra e venda, os valores de alta
+e baixa do dia, a variação no valor nomial e o horário em que a cotação foi
+obtida. As informações de cotação e conversão são retiradas da API de economia
+da Awesome API.
+
+URL: https://docs.awesomeapi.com.br/
+
+"""
+
+
 import telebot
 
 from fetch import conversoes, moedas, moedas_sigla

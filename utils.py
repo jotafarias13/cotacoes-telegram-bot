@@ -1,3 +1,21 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""utils.py: funções e constantes usadas para auxiliar o funcionamento do bot.
+
+As constantes e função aqui definidas são utilizadas exibir mensagens padrões
+e se comunicar com a API de economia do Awesome API para obter as informações
+atuais sobre cotações.
+
+"""
+__author__ = "João Lucas Correia Barbosa de Farias"
+__license__ = "GNU GENERAL PUBLIC LICENSE 3"
+__version__ = "1.0.0"
+__maintainer__ = "João Lucas Correia Barbosa de Farias"
+__email__ = "fariasjota09@gmail.com"
+__status__ = "Production"
+
+
 import datetime
 
 import requests

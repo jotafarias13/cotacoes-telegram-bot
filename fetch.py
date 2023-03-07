@@ -1,3 +1,21 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""fetch.py: baixa, através da API de economia Awesome API as informações
+de moedas e possíveis conversões.
+
+Através dos dados obtidos, é possível encontrar as moedas (em siglas)
+disponíveis, as conversões disponíveis e a descrição de cada sigla, isto é,
+o nome da moeda por extenso.
+
+"""
+__author__ = "João Lucas Correia Barbosa de Farias"
+__license__ = "GNU GENERAL PUBLIC LICENSE 3"
+__version__ = "1.0.0"
+__maintainer__ = "João Lucas Correia Barbosa de Farias"
+__email__ = "fariasjota09@gmail.com"
+__status__ = "Production"
+
 import requests
 
 url_conversoes = "https://economia.awesomeapi.com.br/json/available"
