@@ -1,0 +1,14 @@
+* cotacoes-telegram-bot
+Um bot para solicitação e obtenção de cotações e conversões de moedas no Telegram!
+
+O código desenvolvido utiliza a biblioteca [[https://pypi.org/project/telebot/][TeleBot]] para criar um bot no Telegram que disponibiliza cotações e conversões atualizadas entre diversas moedas. Essas informações são obtidas através da [[https://docs.awesomeapi.com.br/api-de-moedas][API de Cotações]] da [[https://docs.awesomeapi.com.br/][Awesome API]].
+
+O bot fornece as informações de valor de Compra e Venda da moeda, além de valor de Alta e Baixa do dia, da variação no valor nominal e o horário correspondente a essas informações de cotação. Ao ser iniciado, o bot oferece as opções de cotação mais acessadas por brasileiros:
+
+- USD x BRLT: Dólar Americano x Real Brasileiro Turismo
+- USD x BRL: Dólar Americano x Real Brasileiro
+- EUR x BRL: Euro x Real Brasileiro
+- GBP x BRL: Libra Esterlina x Real Brasileiro
+- BRL x ARS: Real Brasileiro x Peso Argentino
+
+Para acessar outras cotações é necessário clicar na opção *Outros*, assim serão mostradas todas as opções de moedas. Ao clicar na moeda desejada, serão mostrados todas as conversões disponíveis para essa moeda. Para voltar ao início e realizar uma nova consulta, basta enviar uma mensagem qualquer.
